@@ -4,6 +4,7 @@ kitabın kaç sayfa olduğunu döndürür.
 """
 from bs4 import BeautifulSoup
 import requests
+import sys
 
 headers_param = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) \
 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36"}
@@ -21,7 +22,7 @@ while True:
     USER_INPUT = str(input("Yazar ve Kitap Adı: ")).replace(" ", "+")
     if USER_INPUT == "0":
         print("Hoşçakalın!")
-        exit("-" * 50)
+        sys.exit("-" * 50)
 
     SEARCH = "https://www.google.com/search?q=" + USER_INPUT + "+kac+sayfa"
     print("Sorgu\t\t  : " + SEARCH)
@@ -44,7 +45,7 @@ while True:
     for i, _ in enumerate(book_information):
         tds = book_information[i].find_all("td")
         for j, _ in enumerate(tds):
-            if tds[j].text ==  "Sayfa Sayısı:" or tds[j].text ==  "Sayfa":
+            if tds[j].text in  ("Sayfa Sayısı:", "Sayfa", "Sayfa Sayısı"):
                 book_paper = tds[j + 1].text
                 PAPER_FLAG = True
                 print("Sayfa Sayısı\t  : " + book_paper)
