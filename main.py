@@ -14,17 +14,24 @@ print("Sorgu: ", SEARCH)
 r = requests.get(SEARCH, headers=headersparam)
 soup = BeautifulSoup(r.content, "lxml", from_encoding="utf-8")
 
-kitap_adi = soup.find("div", attrs={"class": "iKJnec"}).text
+try:
+    kitap_adi = soup.find("div", attrs={"class": "iKJnec"}).text
+    print("Kitap Bilgisi: ", kitap_adi)
+except AttributeError:
+    kitap_adi = ''
 kunye = soup.find_all("div", attrs={"class": "Crs1tb"})
+
 
 td_dict = dict()
 for i in range(len(kunye)):
     tds = kunye[i].find_all("td")
     for j in range(len(tds)):
-        sayfa_sayisi = tds[3].text
+        if tds[j].text ==  "Sayfa Sayısı:":
+            print("Sayfa sayısı: %s" % tds[j + 1].text)
 
 
 
-print("Kitap Bilgisi: ", kitap_adi)
-print("Sayfa Sayısı : ", sayfa_sayisi)
+
+
+
 
