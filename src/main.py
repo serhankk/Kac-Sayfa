@@ -2,9 +2,9 @@
 Girilen yazar ve kitap adına göre
 kitabın kaç sayfa olduğunu döndürür.
 """
-from bs4 import BeautifulSoup
 import requests
 import sys
+from bs4 import BeautifulSoup
 
 headers_param = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) \
 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36"}
